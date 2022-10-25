@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 
 export const Header = () => {
@@ -9,31 +9,46 @@ export const Header = () => {
     //else it will navigate me to login page
     navigate("/login");
   };
-
+  let activeClass = "text-[#a3ce54] border-[#a3ce54]";
   return (
     <header className="header sticky top-0 bg-white shadow-md flex items-center justify-between px-8 py-02">
       {/* <!-- logo --> */}
       <h1 className="w-3/12">
-        <Link to={"/"}>
+        <NavLink to={"/"}>
           <img
             className="hover:shadow-lg px-3 py-1 rounded-lg hover:bg-slate-100 duration-200 "
             src="https://i.ibb.co/Ltp4gh5/logo-2.png"
             alt=""
           />
-        </Link>
+        </NavLink>
       </h1>
 
       {/* <!-- navigation --> */}
       <nav className="nav text-lg">
         <ul className="flex items-center">
-          <li className="p-4 border-b-2 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer active">
-            <Link to={"/"}>Courses</Link>
+          <li className="p-4 border-b-2 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
+            <NavLink
+              to={"/"}
+              className={({ isActive }) => (isActive ? activeClass : undefined)}
+            >
+              Courses
+            </NavLink>
           </li>
           <li className="p-4 border-b-2 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
-            <Link to={"faq"}>FAQ</Link>
+            <NavLink
+              to={"faq"}
+              className={({ isActive }) => (isActive ? activeClass : undefined)}
+            >
+              FAQ
+            </NavLink>
           </li>
           <li className="p-4 border-b-2 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
-            <Link to={"blog"}>Blog</Link>
+            <NavLink
+              to={"blog"}
+              className={({ isActive }) => (isActive ? activeClass : undefined)}
+            >
+              Blog
+            </NavLink>
           </li>
         </ul>
       </nav>
