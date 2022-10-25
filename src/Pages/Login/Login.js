@@ -1,16 +1,17 @@
 import { GoogleAuthProvider, TwitterAuthProvider } from "firebase/auth";
 import React, { useContext, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Contexts/AuthProvider";
+
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { AuthContext } from "../../Auth/AuthProvider";
 
 export const Login = () => {
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/blog";
+  const from = location.state?.from?.pathname || "/";
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [showPass, setShowPass] = useState(false);
-  const { loginWithProvider, logInWithEmailPassword } = useContext(AuthContext);
+  const { signInWithProvider, SignInUser } = useContext(AuthContext);
   const emailRef = useRef();
   const passwordRef = useRef();
   const twitterProvider = new TwitterAuthProvider();
@@ -36,7 +37,7 @@ export const Login = () => {
       emailRef.current.style.borderBottom = "";
       setError("");
     }
-    logInWithEmailPassword(email, password)
+    SignInUser(email, password)
       .then((re) => {
         console.log("lgin successful");
         console.log(re.user);
@@ -50,7 +51,7 @@ export const Login = () => {
   };
   const handleGoogle = () => {
     console.log("clicked");
-    loginWithProvider(googleProvider)
+    signInWithProvider(googleProvider)
       .then((res) => {
         console.log(res.user);
         navigate(from, { replace: true });
@@ -61,7 +62,7 @@ export const Login = () => {
       });
   };
   const handleTwitter = () => {
-    loginWithProvider(twitterProvider)
+    signInWithProvider(twitterProvider)
       .then((re) => {
         console.log(re.user);
         navigate(from, { replace: true });
@@ -78,7 +79,7 @@ export const Login = () => {
   };
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center bg-slate-200">
-      <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <div className="bg-white shadow-md rounded-3xl px-8 pt-6 pb-8 mb-4">
         <form onSubmit={handleSubmit}>
           <div className="mb-4  py-1">
             <label
@@ -93,7 +94,7 @@ export const Login = () => {
               name="email"
               id="email"
               placeholder="email@example.com"
-              className="w-96 appearance-none bg-transparent border-b border-teal-500 focus:bg-slate-100 text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+              className="w-96 rounded appearance-none bg-transparent border-2 focus:border-[#a3ce54]  focus:bg-slate-100 text-gray-700 mr-3 py-3 duration-200 px-2 leading-tight focus:outline-none"
             />
           </div>
           <div className="mb-6  py-1">
@@ -107,7 +108,7 @@ export const Login = () => {
               {/* Icon here */}
               <button
                 onClick={handleShowPass}
-                className="absolute top-1/2 transform -translate-y-1/2 right-3"
+                className="absolute top-1/2 transform -translate-y-1/2 right-6"
               >
                 {showPass ? (
                   <AiFillEyeInvisible className="w-7 h-7" />
@@ -118,32 +119,29 @@ export const Login = () => {
               <input
                 ref={passwordRef}
                 name="password"
-                className="appearance-none bg-transparent  border-b border-teal-500 text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none w-96"
+                className="appearance-none bg-transparent focus:bg-slate-100 border-2 focus:border-[#a3ce54] text-gray-700 rounded mr-3 py-3 px-2 leading-tight focus:outline-none w-96"
                 id="password"
                 type={showPass ? "text" : "password"}
                 placeholder={showPass ? "topsecret" : "*********"}
               />
             </div>
           </div>
-          <p className="text-red-500 text-xs italic my-2">
-            {error}
-            {/* Please choose a password. */}
-          </p>
+          <p className="text-red-500 text-xs italic my-2">{error}</p>
           <p className="text-sky-500 text-right text-xs italic -mt-6 mb-2">
-            New In Wanderland?{" "}
+            New In Smart Mate?{" "}
             <Link to={"/signup"} className="link link-primary underline">
               Create a New Account
             </Link>
           </p>
           <div className="flex items-center justify-between">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-[#a3ce54] rounded-full border border-[#a3ce54] hover:bg-base-100 hover:text-[#a3ce54] text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline duration-200"
               type="submit"
             >
               Sign In
             </button>
             <a
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+              className="inline-block align-baseline font-bold text-sm text-[#a3ae54] hover:text-[#a38f54]"
               href="#"
             >
               Forgot Password?
@@ -180,23 +178,8 @@ export const Login = () => {
               >
                 <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
               </svg>
-              <span className="block w-max font-semibold tracking-wide text-gray-700 text-sm transition duration-300 group-hover:text-blue-600 sm:text-base">
+              <span className="block w-max font-semibold tracking-wide text-gray-700 text-sm transition duration-300 group-hover:text-blue-600 sm:text-base ">
                 Continue with Github
-              </span>
-            </div>
-          </button>
-          <button
-            className="group h-12 px-6 border-2 border-gray-300 rounded-full transition duration-300 
-                                     hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100"
-          >
-            <div className="relative flex  items-center space-x-4 justify-center">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/en/0/04/Facebook_f_logo_%282021%29.svg"
-                className="absolute left-0 w-5 "
-                alt="Facebook logo"
-              />
-              <span className="pl-4 block w-max font-semibold tracking-wide text-gray-700 text-sm transition duration-300 group-hover:text-blue-600 sm:text-base">
-                Continue with Facebook
               </span>
             </div>
           </button>
@@ -241,7 +224,7 @@ export const Login = () => {
       </div>
 
       <p className="text-center text-gray-500 text-xs">
-        &copy;2020 Acme Corp. All rights reserved.
+        &copy;2022 Smart Mate. All rights reserved.
       </p>
     </div>
   );

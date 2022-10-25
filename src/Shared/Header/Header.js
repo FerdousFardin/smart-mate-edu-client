@@ -11,9 +11,9 @@ export const Header = () => {
   };
 
   return (
-    <header class="header sticky top-0 bg-white shadow-md flex items-center justify-between px-8 py-02">
+    <header className="header sticky top-0 bg-white shadow-md flex items-center justify-between px-8 py-02">
       {/* <!-- logo --> */}
-      <h1 class="w-3/12">
+      <h1 className="w-3/12">
         <Link to={"/"}>
           <img
             className="hover:shadow-lg px-3 py-1 rounded-lg hover:bg-slate-100 duration-200 "
@@ -24,22 +24,22 @@ export const Header = () => {
       </h1>
 
       {/* <!-- navigation --> */}
-      <nav class="nav text-lg">
-        <ul class="flex items-center">
-          <li class="p-4 border-b-2 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer active">
+      <nav className="nav text-lg">
+        <ul className="flex items-center">
+          <li className="p-4 border-b-2 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer active">
             <Link to={"/"}>Courses</Link>
           </li>
-          <li class="p-4 border-b-2 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
+          <li className="p-4 border-b-2 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
             <Link to={"faq"}>FAQ</Link>
           </li>
-          <li class="p-4 border-b-2 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
+          <li className="p-4 border-b-2 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
             <Link to={"blog"}>Blog</Link>
           </li>
         </ul>
       </nav>
 
       {/* <!-- buttons ---> */}
-      <div class="w-3/12 flex justify-end items-center gap-5">
+      <div className="w-3/12 flex justify-end items-center gap-5">
         <a href="" className=" h-8">
           <label className="swap swap-rotate">
             {/* <!-- this hidden checkbox controls the state --> */}
