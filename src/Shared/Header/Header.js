@@ -1,8 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 
 export const Header = () => {
+  const navigate = useNavigate();
+  const handleUser = () => {
+    // if(user?.uid) here should check if the user is logged in or not then it will redirect me to manage user page
+    //else it will navigate me to login page
+    navigate("/login");
+  };
+
   return (
     <header class="header sticky top-0 bg-white shadow-md flex items-center justify-between px-8 py-02">
       {/* <!-- logo --> */}
@@ -61,7 +68,12 @@ export const Header = () => {
           className="btn btn-ghost rounded-full tooltip tooltip-bottom"
           data-tip={"hello"}
         >
-          {<FaUser className="w-8 h-8 p-1 hover:text-[#a3ce54] duration-200" />}
+          {
+            <FaUser
+              onClick={handleUser}
+              className="w-8 h-8 p-1 hover:text-[#a3ce54] duration-200"
+            />
+          }
         </button>
       </div>
     </header>
