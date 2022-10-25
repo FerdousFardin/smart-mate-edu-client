@@ -1,9 +1,10 @@
 import React from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 
 export const Header = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const handleUser = () => {
     // if(user?.uid) here should check if the user is logged in or not then it will redirect me to manage user page
     //else it will navigate me to login page
@@ -26,15 +27,15 @@ export const Header = () => {
       {/* <!-- navigation --> */}
       <nav className="nav text-lg">
         <ul className="flex items-center">
-          <li className="p-4 border-b-2 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
+          <li className="p-4 border-b-4 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
             <NavLink
-              to={"/"}
+              to={id ? `/categories/${id}` : "/categories/07"}
               className={({ isActive }) => (isActive ? activeClass : undefined)}
             >
               Courses
             </NavLink>
           </li>
-          <li className="p-4 border-b-2 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
+          <li className="p-4 border-b-4 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
             <NavLink
               to={"faq"}
               className={({ isActive }) => (isActive ? activeClass : undefined)}
@@ -42,7 +43,7 @@ export const Header = () => {
               FAQ
             </NavLink>
           </li>
-          <li className="p-4 border-b-2 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
+          <li className="p-4 border-b-4 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
             <NavLink
               to={"blog"}
               className={({ isActive }) => (isActive ? activeClass : undefined)}
