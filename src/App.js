@@ -5,9 +5,9 @@ import { routes } from "./Routes/Routes";
 
 function App() {
   return (
-    <>
+    <div className="custom-font">
       <RouterProvider router={routes} />
-    </>
+    </div>
   );
 }
 
