@@ -1,19 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const LeftSideNav = ({ category: { thumbnail, id, name } }) => {
-  // console.log(id, name);
+  const activeClass = "text-[#a3ff54] w-full";
   return (
-    <ul className=" w-full">
+    <ul className="w-full">
       {/* <!-- Items Section --> */}
-      <li className="hover:bg-[#a0ce4ebf] hover:text-base-100 active: duration-150 w-full">
-        <Link
+      <li className="hover:bg-[#a0ce4ebb]  active: duration-150 w-full">
+        <NavLink
           to={`categories/${id}`}
-          className="h-16 px-6 flex gap-3 items-center w-full active:scale-95 duration-150"
+          className={({ isActive }) => (isActive ? activeClass : "")}
         >
-          <img className="w-10 h-10" src={thumbnail} alt="" />
-          <h4 className="">{name}</h4>
-        </Link>
+          <span className="h-16 px-6 flex gap-3 items-center w-full active:scale-95 duration-150 hover:text-base-100">
+            <img className="w-10 h-10" src={thumbnail} alt="" />
+            <h4 className="">{name}</h4>
+          </span>
+        </NavLink>
       </li>
     </ul>
   );

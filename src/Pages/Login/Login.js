@@ -21,7 +21,6 @@ export const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    // console.log(emailRef);
     if (!/^\w+([.+-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       emailRef.current.focus();
       emailRef.current.style.borderBottom = "2px solid red";
@@ -50,7 +49,6 @@ export const Login = () => {
       .finally(() => setError(""));
   };
   const handleGoogle = () => {
-    console.log("clicked");
     signInWithProvider(googleProvider)
       .then((res) => {
         console.log(res.user);
