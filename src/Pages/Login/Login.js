@@ -11,7 +11,7 @@ export const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [showPass, setShowPass] = useState(false);
-  const { signInWithProvider, SignInUser } = useContext(AuthContext);
+  const { signInWithProvider, signInUser } = useContext(AuthContext);
   const emailRef = useRef();
   const passwordRef = useRef();
   const twitterProvider = new TwitterAuthProvider();
@@ -23,20 +23,20 @@ export const Login = () => {
     const password = form.password.value;
     if (!/^\w+([.+-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       emailRef.current.focus();
-      emailRef.current.style.borderBottom = "2px solid red";
-      setError("Wrong Email Address!");
+      emailRef.current.style.border = "2px solid red";
+      setError("Invalid Email Address!");
       return;
     } else if (password.length < 8) {
       passwordRef.current.focus();
-      passwordRef.current.style.borderBottom = "2px solid red";
+      passwordRef.current.style.border = "2px solid red";
       setError("Invalid Password!");
       return;
     } else {
-      passwordRef.current.style.borderBottom = "";
-      emailRef.current.style.borderBottom = "";
+      passwordRef.current.style.border = "";
+      emailRef.current.style.border = "";
       setError("");
     }
-    SignInUser(email, password)
+    signInUser(email, password)
       .then((re) => {
         console.log("lgin successful");
         console.log(re.user);
@@ -46,7 +46,7 @@ export const Login = () => {
         console.error(er.code);
         setError(er.code);
       })
-      .finally(() => setError(""));
+      .finally(() => {});
   };
   const handleGoogle = () => {
     signInWithProvider(googleProvider)
@@ -124,13 +124,14 @@ export const Login = () => {
               />
             </div>
           </div>
-          <p className="text-red-500 text-xs italic my-2">{error}</p>
+
           <p className="text-sky-500 text-right text-xs italic -mt-6 mb-2">
             New In Smart Mate?{" "}
             <Link to={"/signup"} className="link link-primary underline">
               Create a New Account
             </Link>
           </p>
+          <p className="text-red-500 text-xs italic my-2">{error}</p>
           <div className="flex items-center justify-between">
             <button
               className="bg-[#a3ce54] rounded-full border border-[#a3ce54] hover:bg-base-100 hover:text-[#a3ce54] text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline duration-200"
@@ -138,6 +139,7 @@ export const Login = () => {
             >
               Sign In
             </button>
+
             <a
               className="inline-block align-baseline font-bold text-sm text-[#a3ae54] hover:text-[#a38f54]"
               href="#"

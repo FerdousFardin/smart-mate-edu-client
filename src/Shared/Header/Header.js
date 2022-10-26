@@ -1,15 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
+import { AuthContext } from "../../Auth/AuthProvider";
+import { ProfileCard } from "../../Components/ProfileCard/ProfileCard";
 
 export const Header = () => {
-  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
-  const handleUser = () => {
-    // if(user?.uid) here should check if the user is logged in or not then it will redirect me to manage user page
-    //else it will navigate me to login page
-    navigate("/login");
-  };
   let activeClass = "text-[#a3ce54] border-[#a3ce54]";
   return (
     <header className="header sticky top-0 bg-white shadow-md flex items-center justify-between px-8 py-02">
@@ -80,17 +77,30 @@ export const Header = () => {
             </svg>
           </label>
         </a>
-        <button
-          className="btn btn-ghost rounded-full tooltip tooltip-bottom"
-          data-tip={"hello"}
-        >
-          {
-            <FaUser
-              onClick={handleUser}
-              className="w-8 h-8 p-1 hover:text-[#a3ce54] duration-200"
-            />
-          }
-        </button>
+        <div className="dropdown dropdown-end">
+          <button
+            tabIndex={0}
+            className=" hover:text-[#a3ce54] duration-200 cursor-pointer rounded-full tooltip tooltip-bottom"
+            data-tip={user?.displayName ? user.displayName : "N/A"}
+          >
+            {user?.photoURL ? (
+              <img
+                className="w-10 h-10 duration-200 rounded-full p-1 bg-[#a3ce54]"
+                src={user.photoURL}
+              />
+            ) : (
+              <FaUser className="w-10 h-10 p-1 rounded-full hover:bg-base-300 hover:text-[#a3ce54] duration-200" />
+            )}
+          </button>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li>
+              <ProfileCard />
+            </li>
+          </ul>
+        </div>
       </div>
     </header>
   );
