@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { AiOutlineLogout } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Auth/AuthProvider";
 
 export const ProfileCard = () => {
   const { user, signOutUser } = useContext(AuthContext);
-  console.log(user);
+  const navigate = useNavigate();
   return (
     // <!-- component -->
     <div className="mx-auto right-0 mt-2 w-60 dropdown-content menu p-2 shadow bg-base-300 rounded-box">
@@ -41,7 +41,9 @@ export const ProfileCard = () => {
             <button
               onClick={() =>
                 signOutUser()
-                  .then(() => {})
+                  .then(() => {
+                    navigate("/");
+                  })
                   .catch((er) => console.error(er))
               }
               href="#"

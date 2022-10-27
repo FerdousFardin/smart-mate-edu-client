@@ -28,11 +28,7 @@ export const CourseDetails = ({
 }) => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  const handleNavigate = () => {
-    if (user?.uid) navigate(`/checkout/${_id}`);
-    else navigate("/login");
-    console.log(_id);
-  };
+  // const handleNavigate = ;
   return (
     <section className="flex flex-col justify-center gap-5 lg:gap-10">
       <img className="w-3/4 rounded-lg" src={large} alt="" />
@@ -109,7 +105,7 @@ export const CourseDetails = ({
         Log In / Register now to unlock this Course
       </h3>
       <button
-        onClick={handleNavigate}
+        onClick={() => navigate(`/checkout/${_id}`)}
         className="bg-[#a3ce54] rounded-full border border-[#a3ce54] hover:bg-base-100 hover:text-[#a3ce54] text-white font-bold py-2 lg:py-4 px-4 lg:px-8 focus:outline-none focus:shadow-outline duration-200 w-96 flex items-center gap-3 justify-center"
         type="submit"
       >

@@ -1,4 +1,8 @@
-import { GoogleAuthProvider, TwitterAuthProvider } from "firebase/auth";
+import {
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  TwitterAuthProvider,
+} from "firebase/auth";
 import React, { useContext, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -8,6 +12,7 @@ import { AuthContext } from "../../Auth/AuthProvider";
 export const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  console.log("from", location.state?.from?.pathname);
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [showPass, setShowPass] = useState(false);
@@ -16,6 +21,7 @@ export const Login = () => {
   const passwordRef = useRef();
   const twitterProvider = new TwitterAuthProvider();
   const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -50,6 +56,17 @@ export const Login = () => {
   };
   const handleGoogle = () => {
     signInWithProvider(googleProvider)
+      .then((res) => {
+        console.log(res.user);
+        navigate(from, { replace: true });
+      })
+      .catch((er) => {
+        console.error(er.code);
+        setError(er.code);
+      });
+  };
+  const handleGithub = () => {
+    signInWithProvider(githubProvider)
       .then((res) => {
         console.log(res.user);
         navigate(from, { replace: true });
@@ -166,6 +183,7 @@ export const Login = () => {
             </div>
           </button>
           <button
+            onClick={handleGithub}
             className="group h-12 px-6 border-2 border-gray-300 rounded-full transition duration-300 
  hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100"
           >
