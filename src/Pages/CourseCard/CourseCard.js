@@ -8,7 +8,7 @@ export const CourseCard = ({
     title,
     images: { small },
     instructor,
-    badges: [badge],
+    badges,
     rating,
   },
 }) => {
@@ -21,12 +21,11 @@ export const CourseCard = ({
         <div className="p-5">
           <a href="#">
             <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2 dark:text-white">
-              Noteworthy technology acquisitions 2021
+              {title}
             </h5>
           </a>
-          <p className="font-normal text-gray-700 mb-3 dark:text-gray-400">
+          <div className="font-normal text-gray-700 mb-3 dark:text-gray-400">
             {" "}
-            <h2 className="card-title">{title}</h2>
             <p>
               Instructor: <strong>{instructor}</strong>
             </p>
@@ -34,12 +33,16 @@ export const CourseCard = ({
               Rating: <strong>{rating}</strong>
               <AiFillStar className="w-6 h-6 text-[#FFD700]" />
             </p>
-            {badge && (
-              <p className="badge badge-sm md:badge-md lg:badge-lg border-[#FFD700] bg-[#FFD700] text-white">
-                {badge}
-              </p>
-            )}
-          </p>
+            {badges.length &&
+              badges.map((badge, idx) => (
+                <p
+                  key={idx}
+                  className="badge badge-sm md:badge-md lg:badge-lg border-[#FFD700] bg-[#FFD700] text-white mr-2"
+                >
+                  {badge}
+                </p>
+              ))}
+          </div>
           <Link
             to={`/categories/${category_id}`}
             className="text-white hover:text-[#a3ce54] bg-[#a3ce54] hover:bg-base-100 focus:ring-4 focus:ring-[#a3ce54] border border-[#a3ce54] font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center duration-200"

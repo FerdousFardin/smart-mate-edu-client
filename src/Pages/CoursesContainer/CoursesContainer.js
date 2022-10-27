@@ -7,7 +7,7 @@ export const CoursesContainer = () => {
   return (
     <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 m-5 lg:items-start">
       {courses.map((c) => (
-        <CourseCard course={c} />
+        <CourseCard key={c._id} course={c} />
       ))}
     </section>
   );
