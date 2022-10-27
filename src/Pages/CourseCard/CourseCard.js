@@ -33,15 +33,16 @@ export const CourseCard = ({
               Rating: <strong>{rating}</strong>
               <AiFillStar className="w-6 h-6 text-[#FFD700]" />
             </p>
-            {badges.length &&
-              badges.map((badge, idx) => (
-                <p
-                  key={idx}
-                  className="badge badge-sm md:badge-md lg:badge-lg border-[#FFD700] bg-[#FFD700] text-white mr-2"
-                >
-                  {badge}
-                </p>
-              ))}
+            {badges.length
+              ? badges.map((badge, idx) => (
+                  <p
+                    key={idx}
+                    className="badge badge-sm md:badge-md lg:badge-lg border-[#FFD700] bg-[#FFD700] text-white mr-2"
+                  >
+                    {badge}
+                  </p>
+                ))
+              : ""}
           </div>
           <Link
             to={`/categories/${category_id}`}
