@@ -14,13 +14,15 @@ https://github.com/programming-hero-web-course1/b610-lerning-platform-server-sid
 
 ### Live Website Link
 
+https://assignment-10-d089e.web.app
+
 ## About this Project
 
-- I've used **React Router** for you to navigate seemlessly from one page to another and the pages looks nice both on PC and mobile devices.
+- I've used **React Router** for you to navigate seemlessly from one page to another and the pages look nice both on PC and mobile devices.
 - I've used Google's **Firebase** for authenticating so no unauthorized user can harm your website.
-- I've implemented traditional email and password for login with also most common login methods like **Google** account, **GitHub** account and **Twitter** account so user don't have to go through the hassle for **Registering**.
+- I've implemented traditional email and password for login with most common login methods like **Google** account, **GitHub** account and **Twitter** account so user don't have to go through the hassle for **Registering**.
 - I've made my own Server API so I don't rely on others or free resources for API's
-- I've also implemented private route for only valid and verified users so no uverified user can access the content within these private routes.
+- I've also implemented private route for only valid and verified users so no unverified user can access the content within these private routes.
 
 ## Technologies has been used in this project
 
