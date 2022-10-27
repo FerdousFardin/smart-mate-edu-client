@@ -50,7 +50,7 @@ export const ProfileCard = () => {
               className="w-full px-4 py-2 pb-4 hover:bg-gray-100 flex"
             >
               <AiOutlineLogout className="h-4 w-4 text-gray-800 fill-current mr-2" />
-              <p className="text-sm font-medium text-gray-800 leading-none">
+              <p className="text-sm hidden lg:inline font-medium text-gray-800 leading-none">
                 Logout
               </p>
             </button>

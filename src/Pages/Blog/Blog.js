@@ -5,7 +5,7 @@ import { MdLibraryBooks } from "react-icons/md";
 export const Blog = () => {
   return (
     <>
-      <section className="flex flex-col justify-center w-full items-center lg:items-start lg:pl-60 gap-5 lg:gap-10">
+      <section className="flex flex-col justify-center w-full items-center lg:items-start lg:pl-60 gap-5 lg:gap-10 mt-5">
         <img
           className="lg:w-2/4 rounded-lg"
           src={"https://nordicapis.com/wp-content/uploads/What-is-CORS-.png"}
@@ -23,7 +23,7 @@ export const Blog = () => {
           <span className="border border-l-2 border-slate-600"></span>
           <span className="flex gap-2 items-center">
             <MdLibraryBooks />
-            <h4>CORS</h4>
+            <h4>Middleware</h4>
           </span>
         </div>
         <div className="flex justify-between">
@@ -77,7 +77,7 @@ export const Blog = () => {
           <span className="border border-l-2 border-slate-600"></span>
           <span className="flex gap-2 items-center">
             <MdLibraryBooks />
-            <h4>CORS</h4>
+            <h4>Firebase</h4>
           </span>
         </div>
         <div className="flex justify-between">
@@ -124,6 +124,115 @@ export const Blog = () => {
         </p>
       </section>
       <div className="divider"></div>
+      <section className="flex flex-col justify-center w-full items-center lg:items-start lg:pl-60 gap-5 lg:gap-10">
+        <img
+          className="lg:w-2/4 rounded-lg"
+          src={"https://i.ibb.co/mCPMr1Z/1-Zg-Wg-OXWVt-GFCNpo-RSj-Od-Og.jpg"}
+          alt=""
+        />
+        <div className="flex items-center gap-3">
+          <img
+            className="rounded-full w-10"
+            src="https://images.unsplash.com/photo-1485206412256-701ccc5b93ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=894&q=80"
+            alt=""
+          />
+
+          <h4>
+            by <span className="font-semibold">Ferdous Fardin</span>
+          </h4>
+          <span className="border border-l-2 border-slate-600"></span>
+          <span className="flex gap-2 items-center">
+            <MdLibraryBooks />
+            <h4>React Router</h4>
+          </span>
+        </div>
+        <div className="flex justify-between">
+          <h1 className="text-3xl font-bold">
+            {" "}
+            How does the private route work?
+          </h1>
+        </div>
+        <div className="uppercase text-sm bg-[#a0ce4e] w-fit px-8 py-4 rounded-lg text-white">
+          Overview
+        </div>
+        <p className="lg:w-2/4 mx-5 lg:mx-0 leading-7 tracking-wider">
+          A private route or a restricted route that unauthenticated user can
+          see but can not access or see the contents within. PrivateRoute
+          component is the blueprint for all private routes in the application.
+          If the user is logged in, go on and display the component in question;
+          otherwise, redirect the user to sign-in page. Additionally, we can
+          define the logic of{" "}
+          <code className="bg-[#e5e6e6] p-1 rounded">isLogin</code> utility
+          function separately in{" "}
+          <code className="bg-[#e5e6e6] p-1 rounded">utils</code> folder. If the
+          authorised user goes to the sign-in page, we will redirect to private
+          route.
+        </p>
+      </section>
+      <div className="divider"></div>
+      <section className="flex flex-col justify-center w-full items-center lg:items-start lg:pl-60 gap-5 lg:gap-10">
+        <img
+          className="lg:w-2/4 rounded-lg border"
+          src={
+            "https://railsware.com/blog/wp-content/uploads/2018/09/2400%D1%851260-rw-blog-node-js.png"
+          }
+          alt=""
+        />
+        <div className="flex items-center gap-3">
+          <img
+            className="rounded-full w-10"
+            src="https://images.unsplash.com/photo-1485206412256-701ccc5b93ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=894&q=80"
+            alt=""
+          />
+          <h4>
+            by <span className="font-semibold">Ferdous Fardin</span>
+          </h4>
+          <span className="border border-l-2 border-slate-600"></span>
+          <span className="flex gap-2 items-center">
+            <MdLibraryBooks />
+            <h4>Node.js</h4>
+          </span>
+        </div>
+        <div className="flex justify-between">
+          <h1 className="text-3xl font-bold text-center lg:text-left ">
+            What is Node?
+          </h1>
+        </div>
+        <div className="uppercase text-sm bg-[#a0ce4e] w-fit px-8 py-4 rounded-lg text-white">
+          Overview
+        </div>
+        <p className="lg:w-2/4 mx-5 lg:mx-0 leading-7 tracking-wider">
+          Node.js is an open-source, cross-platform JavaScript runtime
+          environment and library for running web applications outside the
+          client's browser. Ryan Dahl developed it in 2009, and its latest
+          iteration, version 15.14, was released in April 2021. Developers use
+          Node.js to create server-side web applications, and it is perfect for
+          data-intensive applications since it uses an asynchronous,
+          event-driven model.
+        </p>
+        <h1 className="lg:w-1/2 text-3xl font-bold text-center lg:text-left ">
+          How it works?
+        </h1>
+        <p className=" lg:w-2/4 mx-5 lg:mx-0 mb-10 leading-7 tracking-wider">
+          First of all just like other languages node comes with packages and
+          modules. These are libraries of functions that we can import from npm
+          (node package manager) into our code and utilize. If you have node
+          installed on your computer, then you already have some basic modules
+          installed. These are how we create a simple server, but I’ll get to
+          that later. If you are familiar with JavaScript, then you know it is
+          asynchronous and single threaded. The single thread is the event loop
+          which is responsible for running all functions and requests. The
+          asynchronous behavior is extremely important when using node, because
+          it guarantees that the event loop is never blocked by a synchronous
+          function.{" "}
+          <a
+            className="link-hover link-primary"
+            href="https://medium.com/@lukepierotti/node-js-what-is-it-and-how-does-it-work-e3e83d054662"
+          >
+            Read More here...
+          </a>
+        </p>
+      </section>
     </>
   );
 };

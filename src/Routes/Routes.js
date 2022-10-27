@@ -14,7 +14,7 @@ export const routes = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
-    loader: () => fetch("http://localhost:5000/categories"),
+    loader: () => fetch("https://smart-mate-edu.vercel.app/categories"),
     errorElement: <Error />,
     children: [
       {
@@ -31,12 +31,12 @@ export const routes = createBrowserRouter([
         path: "/categories/:id",
         element: <CategoryCourses />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/categories/${params.id}`),
+          fetch(`https://smart-mate-edu.vercel.app/categories/${params.id}`),
       },
       {
         path: "/checkout/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/course/${params.id}`),
+          fetch(`https://smart-mate-edu.vercel.app/course/${params.id}`),
         element: (
           <PrivateRoute>
             <Checkout />

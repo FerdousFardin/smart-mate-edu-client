@@ -3,18 +3,87 @@ import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import { FaUser } from "react-icons/fa";
 import { AuthContext } from "../../Auth/AuthProvider";
 import { ProfileCard } from "../../Components/ProfileCard/ProfileCard";
+import { LeftSideNav } from "../LeftSideNav/LeftSideNav";
+import { AiOutlineLogout } from "react-icons/ai";
+import { IoReorderFourOutline } from "react-icons/io5";
 
-export const Header = () => {
-  const { user } = useContext(AuthContext);
+export const Header = ({ categories }) => {
+  const { user, signOutUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   const { id } = useParams();
   let activeClass = "text-[#a3ce54] border-[#a3ce54]";
   return (
-    <header className="header sticky top-0 bg-white shadow-md flex items-center justify-between px-8 py-02">
+    <header className="header sticky top-0 bg-white shadow-md flex items-center lg:justify-between px-4 lg:px-8 py-02">
       {/* <!-- logo --> */}
-      <h1 className="w-3/12">
-        <NavLink to={"/"}>
+      <h1 className="w-5/12 lg:w-3/12">
+        <div className="dropdown lg:hidden">
+          <label tabIndex={0} className="p-1">
+            <span className="flex items-end hover:shadow-lg px-2 lg:px-3 py-1 rounded-lg hover:bg-slate-100 duration-200 ">
+              <IoReorderFourOutline className="w-10 h-10 text-slate-500" />
+              <img
+                className=""
+                src="https://i.ibb.co/Ltp4gh5/logo-2.png"
+                alt=""
+              />
+            </span>
+          </label>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu p-2 shadow bg-base-200 w-fit"
+          >
+            <li>
+              {user?.uid ? (
+                <div className="">
+                  <button
+                    onClick={() =>
+                      signOutUser()
+                        .then(() => {
+                          navigate("/");
+                        })
+                        .catch((er) => console.error(er))
+                    }
+                    href="#"
+                    className="w-full px-4 py-2 pb-4 hover:bg-gray-100 flex"
+                  >
+                    <AiOutlineLogout className="h-4 w-4 text-gray-800 fill-current mr-2" />
+                    <p className="text-xs lg:textsm font-medium text-gray-800 leading-none">
+                      Logout{" "}
+                      <span className="inline lg:hidden">
+                        {user?.displayName || "User"}
+                      </span>
+                    </p>
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <span className="flex gap-1">
+                    <Link
+                      className="w-full px-4 py-2 pb-4 text-black hover:bg-gray-100 flex"
+                      to={"/login"}
+                    >
+                      Login
+                    </Link>
+                  </span>
+                  <span className="flex gap-1">
+                    <Link
+                      className="w-full px-4 py-2 pb-4 text-black hover:bg-gray-100 flex"
+                      to={"/signup"}
+                    >
+                      Register
+                    </Link>
+                  </span>
+                </>
+              )}
+            </li>
+            <div className="divider"></div>
+            {categories.map((category) => (
+              <LeftSideNav category={category} />
+            ))}
+          </ul>
+        </div>
+        <NavLink to={"/"} className="hidden lg:block ">
           <img
-            className="hover:shadow-lg px-3 py-1 rounded-lg hover:bg-slate-100 duration-200 "
+            className="hover:shadow-lg px-2 lg:px-3 py-1 rounded-lg hover:bg-slate-100 duration-200 "
             src="https://i.ibb.co/Ltp4gh5/logo-2.png"
             alt=""
           />
@@ -22,17 +91,17 @@ export const Header = () => {
       </h1>
 
       {/* <!-- navigation --> */}
-      <nav className="nav text-lg">
+      <nav className=" nav text-lg">
         <ul className="flex items-center">
-          <li className="p-4 border-b-4 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
+          <li className="p-4 pl-2 lg:pl-0 border-b-4 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
             <NavLink
-              to={id ? `/categories/${id}` : "/categories/07"}
+              to={"/courses"}
               className={({ isActive }) => (isActive ? activeClass : undefined)}
             >
               Courses
             </NavLink>
           </li>
-          <li className="p-4 border-b-4 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
+          <li className="p-4 pl-2 lg:pl-0 border-b-4 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
             <NavLink
               to={"faq"}
               className={({ isActive }) => (isActive ? activeClass : undefined)}
@@ -40,7 +109,7 @@ export const Header = () => {
               FAQ
             </NavLink>
           </li>
-          <li className="p-4 border-b-4 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
+          <li className="p-4 pl-2 lg:pl-0 border-b-4 border-[#a3ce54] border-opacity-0 hover:border-opacity-100 hover:text-[#a3ce54] duration-200 cursor-pointer">
             <NavLink
               to={"blog"}
               className={({ isActive }) => (isActive ? activeClass : undefined)}
@@ -52,7 +121,7 @@ export const Header = () => {
       </nav>
 
       {/* <!-- buttons ---> */}
-      <div className="w-3/12 flex justify-end items-center gap-5">
+      <div className="w-3/12 hidden lg:flex justify-end items-center gap-5">
         <a href="" className=" h-8">
           <label className="swap swap-rotate">
             {/* <!-- this hidden checkbox controls the state --> */}
@@ -102,6 +171,7 @@ export const Header = () => {
           </ul>
         </div>
       </div>
+      {/* Mobile only */}
     </header>
   );
 };

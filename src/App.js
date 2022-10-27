@@ -5,7 +5,7 @@ import { routes } from "./Routes/Routes";
 
 function App() {
   return (
-    <div className="custom-font">
+    <div className="custom-font scroll-smooth">
       <RouterProvider router={routes} />
     </div>
   );

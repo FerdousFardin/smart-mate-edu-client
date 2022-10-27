@@ -11,31 +11,33 @@ export const Main = () => {
   return (
     <>
       {/* <!-- header --> */}
-      <Header />
+      <Header categories={categories} />
       <main
         className={
           location.pathname === "/" || location.pathname.includes("categories")
-            ? "grid grid-cols-6"
+            ? "lg:grid lg:grid-cols-6"
             : ""
         }
       >
         {location.pathname === "/" ||
         location.pathname.includes("categories") ? (
           <>
-            <section className="">
+            <section className="hidden lg:block">
               {/* <!-- component --> */}
               <div className="h-screen flex bg-gray-500">
                 {/* <!-- container --> */}
 
                 <aside className="flex flex-col items-center bg-white text-gray-700 shadow h-full  w-full pt-5">
                   {/* <!-- Side Nav Bar--> */}
-                  {categories.map((category) => (
-                    <LeftSideNav category={category} key={category.id} />
-                  ))}
+                  <ul className="w-full list-none">
+                    {categories.map((category) => (
+                      <LeftSideNav category={category} key={category.id} />
+                    ))}
+                  </ul>
                 </aside>
               </div>
             </section>
-            <section className="col-span-5  min-h-screen">
+            <section className="lg:col-span-5 py-5 lg:py-0 lg:min-h-screen">
               <Outlet />
             </section>
           </>
