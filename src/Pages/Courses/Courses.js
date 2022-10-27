@@ -2,7 +2,7 @@ import React from "react";
 
 export const Courses = () => {
   return (
-    <div className="bg-[url(https://i.ibb.co/V3zsLDZ/bg7.jpg)] w-full h-full bg-cover flex flex-col gap-2 justify-center items-center">
+    <div className="bg-[url(https://i.ibb.co/V3zsLDZ/bg7.jpg)] w-full h-screen bg-cover flex flex-col gap-2 justify-center items-center rounded-md">
       <h1 className="font-extralight text-2xl lg:text-4xl text-white text-center">
         Choose From A Range Of{" "}
         <strong className="font-semibold">Online Courses</strong>

@@ -6,7 +6,6 @@ import { AuthContext } from "../../Auth/AuthProvider";
 export const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
-  console.log(location);
   if (loading)
     return (
       <div className="h-screen w-full grid place-items-center">

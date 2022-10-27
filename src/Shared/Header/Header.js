@@ -77,7 +77,7 @@ export const Header = ({ categories }) => {
             </li>
             <div className="divider"></div>
             {categories.map((category) => (
-              <LeftSideNav category={category} />
+              <LeftSideNav key={category.id} category={category} />
             ))}
           </ul>
         </div>

@@ -121,8 +121,11 @@ export const CourseDetails = ({
       <div className="border border-gray-300 rounded p-5 lg:w-3/4">
         <h3 className="text-lg lg:text-xl font-semibold">What you'll learn</h3>
         <ul className="grid lg:grid-cols-2 mt-5 gap-5">
-          {about.map((a) => (
-            <li className="text-sm lg:text-base flex items-center gap-3">
+          {about.map((a, idx) => (
+            <li
+              key={idx}
+              className="text-sm lg:text-base flex items-center gap-3"
+            >
               <AiOutlineCheck />
               {a}
             </li>

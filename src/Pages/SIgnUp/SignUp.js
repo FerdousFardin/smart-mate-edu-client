@@ -14,7 +14,7 @@ export const SignUp = () => {
     // console.log(displayName, email, password, photoURL);
     signUpUser(email, password)
       .then((res) => {
-        console.log(res.user);
+        // console.log(res.user);
       })
       .catch((er) => {
         console.error(er);

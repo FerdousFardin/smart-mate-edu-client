@@ -12,7 +12,6 @@ import { AuthContext } from "../../Auth/AuthProvider";
 export const Login = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  console.log("from", location.state?.from?.pathname);
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [showPass, setShowPass] = useState(false);
@@ -44,8 +43,7 @@ export const Login = () => {
     }
     signInUser(email, password)
       .then((re) => {
-        console.log("lgin successful");
-        console.log(re.user);
+        // console.log(re.user);
         navigate(from, { replace: true });
       })
       .catch((er) => {
@@ -57,7 +55,7 @@ export const Login = () => {
   const handleGoogle = () => {
     signInWithProvider(googleProvider)
       .then((res) => {
-        console.log(res.user);
+        // console.log(res.user);
         navigate(from, { replace: true });
       })
       .catch((er) => {
@@ -68,7 +66,7 @@ export const Login = () => {
   const handleGithub = () => {
     signInWithProvider(githubProvider)
       .then((res) => {
-        console.log(res.user);
+        // console.log(res.user);
         navigate(from, { replace: true });
       })
       .catch((er) => {
@@ -79,7 +77,7 @@ export const Login = () => {
   const handleTwitter = () => {
     signInWithProvider(twitterProvider)
       .then((re) => {
-        console.log(re.user);
+        // console.log(re.user);
         navigate(from, { replace: true });
       })
       .catch((er) => {

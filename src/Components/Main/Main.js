@@ -7,19 +7,19 @@ import { LeftSideNav } from "../../Shared/LeftSideNav/LeftSideNav";
 export const Main = () => {
   const location = useLocation();
   const categories = useLoaderData();
-  // console.log(categories);
   return (
     <>
       {/* <!-- header --> */}
       <Header categories={categories} />
       <main
         className={
-          location.pathname === "/" || location.pathname.includes("categories")
+          location.pathname === "/courses" ||
+          location.pathname.includes("categories")
             ? "lg:grid lg:grid-cols-6"
-            : ""
+            : "min-h-screen"
         }
       >
-        {location.pathname === "/" ||
+        {location.pathname === "/courses" ||
         location.pathname.includes("categories") ? (
           <>
             <section className="hidden lg:block">
@@ -37,7 +37,7 @@ export const Main = () => {
                 </aside>
               </div>
             </section>
-            <section className="lg:col-span-5 py-5 lg:py-0 lg:min-h-screen">
+            <section className="lg:col-span-5 py-5 lg:pt-0 lg:pb-10 lg:min-h-screen">
               <Outlet />
             </section>
           </>

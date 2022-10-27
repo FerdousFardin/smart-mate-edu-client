@@ -5,6 +5,7 @@ import { Blog } from "../Pages/Blog/Blog";
 import { CategoryCourses } from "../Pages/CategoryCourses/CategoryCourses";
 import { Checkout } from "../Pages/Checkout/Checkout";
 import { Courses } from "../Pages/Courses/Courses";
+import { CoursesContainer } from "../Pages/CoursesContainer/CoursesContainer";
 import { Error } from "../Pages/Error/Error";
 import { Login } from "../Pages/Login/Login";
 import { SignUp } from "../Pages/SIgnUp/SignUp";
@@ -20,6 +21,11 @@ export const routes = createBrowserRouter([
       {
         path: "/",
         element: <Courses />,
+      },
+      {
+        path: "/courses",
+        element: <CoursesContainer />,
+        loader: () => fetch("https://smart-mate-edu.vercel.app/courses"),
       },
       {
         path: "/blog",
