@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -11,9 +12,21 @@ import {
 
 export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
+  const auth = getAuth(app);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-  const auth = getAuth(app);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      //|| currentUser.emailVerified
+
+      setUser(currentUser);
+
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const signUpUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
@@ -29,19 +42,9 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     return signOut(auth);
   };
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      //|| currentUser.emailVerified
-
-      setUser(currentUser);
-
-      setLoading(false);
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  const sendForPas = (email) => {
+    return sendPasswordResetEmail(auth, email);
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -51,6 +54,7 @@ export const AuthProvider = ({ children }) => {
         signInUser,
         signInWithProvider,
         signOutUser,
+        sendForPas,
       }}
     >
       {children}

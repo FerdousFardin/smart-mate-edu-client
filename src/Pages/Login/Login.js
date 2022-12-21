@@ -8,42 +8,51 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { AuthContext } from "../../Auth/AuthProvider";
+import { useForm } from "react-hook-form";
 
 export const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [showPass, setShowPass] = useState(false);
-  const { signInWithProvider, signInUser } = useContext(AuthContext);
+  const { signInWithProvider, signInUser, sendForPas } =
+    useContext(AuthContext);
   const emailRef = useRef();
   const passwordRef = useRef();
   const twitterProvider = new TwitterAuthProvider();
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
+  const handleLogin = (data) => {
+    const email = data.email;
+    const password = data.password;
     if (!/^\w+([.+-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       emailRef.current.focus();
       emailRef.current.style.border = "2px solid red";
+      emailRef.current.style.color = "red";
+
       setError("Invalid Email Address!");
       return;
     } else if (password.length < 8) {
       passwordRef.current.focus();
       passwordRef.current.style.border = "2px solid red";
+      passwordRef.current.style.color = "red";
       setError("Invalid Password!");
       return;
     } else {
+      emailRef.current.style.color = "";
+      passwordRef.current.style.color = "";
       passwordRef.current.style.border = "";
       emailRef.current.style.border = "";
       setError("");
     }
     signInUser(email, password)
       .then((re) => {
-        // console.log(re.user);
         navigate(from, { replace: true });
       })
       .catch((er) => {
@@ -55,7 +64,6 @@ export const Login = () => {
   const handleGoogle = () => {
     signInWithProvider(googleProvider)
       .then((res) => {
-        // console.log(res.user);
         navigate(from, { replace: true });
       })
       .catch((er) => {
@@ -90,10 +98,21 @@ export const Login = () => {
     passwordRef.current.focus();
     setShowPass(!showPass);
   };
+  const handleForgetPassword = (email) => {
+    setError("");
+    sendForPas(email)
+      .then(() => {
+        // toast;
+        alert("Email sent to " + email);
+      })
+      .catch((er) => {
+        setError(er.code);
+      });
+  };
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center bg-slate-200">
       <div className="bg-white shadow-md rounded-3xl px-8 pt-6 pb-8 mb-4">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(handleLogin)}>
           <div className="mb-4  py-1">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -102,12 +121,16 @@ export const Login = () => {
               Email
             </label>
             <input
+              {...register("email", {
+                required: true,
+              })}
               ref={emailRef}
               type="email"
               name="email"
               id="email"
               placeholder="email@example.com"
-              className="w-96 rounded appearance-none bg-transparent border-2 focus:border-[#a3ce54]  focus:bg-slate-100 text-gray-700 mr-3 py-3 duration-200 px-2 leading-tight focus:outline-none"
+              className="w-96 rounded appearance-none bg-transparent border-2 focus:border-[#a3ce54]  focus:bg-slate-100 text-gray-700 mr-3 py-3 duration-200 px-2 leading-tight focus:outline-none invalid:text-red-600
+              focus:invalid:border-red-500 focus:invalid:ring-red-500"
             />
           </div>
           <div className="mb-6  py-1">
@@ -130,9 +153,14 @@ export const Login = () => {
                 )}
               </button>
               <input
+                {...register("password", {
+                  required: true,
+                })}
                 ref={passwordRef}
                 name="password"
-                className="appearance-none bg-transparent focus:bg-slate-100 border-2 focus:border-[#a3ce54] text-gray-700 rounded mr-3 py-3 px-2 leading-tight focus:outline-none w-96"
+                minlength="6"
+                className="appearance-none bg-transparent focus:bg-slate-100 border-2 focus:border-[#a3ce54] text-gray-700 rounded mr-3 py-3 px-2 leading-tight focus:outline-none w-96 invalid:text-red-600
+                focus:invalid:border-red-500 focus:invalid:ring-red-500"
                 id="password"
                 type={showPass ? "text" : "password"}
                 placeholder={showPass ? "topsecret" : "*********"}
@@ -146,7 +174,11 @@ export const Login = () => {
               Create a New Account
             </Link>
           </p>
-          <p className="text-red-500 text-xs italic my-2">{error}</p>
+          <p className="text-red-500 text-xs italic my-2">
+            {error ||
+              (errors.email && errors.email.message) ||
+              (errors.password && errors.password.message)}
+          </p>
           <div className="flex items-center justify-between">
             <button
               className="bg-[#a3ce54] rounded-full border border-[#a3ce54] hover:bg-base-100 hover:text-[#a3ce54] text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline duration-200"
@@ -155,12 +187,12 @@ export const Login = () => {
               Sign In
             </button>
 
-            <a
+            <button
+              onClick={() => handleForgetPassword(emailRef.current.value)}
               className="inline-block align-baseline font-bold text-sm text-[#a3ae54] hover:text-[#a38f54]"
-              href="#"
             >
               Forgot Password?
-            </a>
+            </button>
           </div>
         </form>
         <div className="mt-16 grid space-y-4">
